@@ -1,25 +1,43 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Inbox
+      Weg nach Rom
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-refresher slot="fixed" (ionRefresh)="refresh($event)">
-    <ion-refresher-content></ion-refresher-content>
-  </ion-refresher>
   
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">
-        Inbox
+        Weg nach Rom
       </ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <ion-card-content>
+    Bekanntlich führen alle Wege nach Rom. Diese Webseite zeigt dir die Distanz und Richtung in die du laufen musst.
+  </ion-card-content>
   
-  <ion-list>
-    <app-message *ngFor="let message of getMessages()" [message]="message"></app-message>
-  </ion-list>
+  <ion-button (click)="trackLocation()" expand="block" fill="clear" shape="round">
+    Zeig mir den Weg nach Rom
+  </ion-button>
+
+  <ion-button (click)="startCompass()" expand="block" fill="clear" shape="round">
+    Kompass Go
+  </ion-button>
+
+  <ion-card *ngIf="coordinates">
+    Latitude / Breitengrad = {{coordinates.latitude}}<br/>
+    Longitude / Längengrad = {{coordinates.longitude}}
+  </ion-card>
+
+
+  <ion-card *ngIf="alpha">
+    Alpha = {{alpha}}
+  </ion-card>
+  
+
+
 </ion-content>
