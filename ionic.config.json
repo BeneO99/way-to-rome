@@ -1,0 +1,7 @@
+{
+  "name": "WayToRome",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
