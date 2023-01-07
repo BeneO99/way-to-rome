@@ -15,29 +15,28 @@
       </ion-title>
     </ion-toolbar>
   </ion-header>
-
-  <ion-card-content>
-    Bekanntlich führen alle Wege nach Rom. Diese Webseite zeigt dir die Distanz und Richtung in die du laufen musst.
+<div *ngIf="!outputDirection else arrow" class="center">
+  <ion-card-content class="description">
+    Bekanntlich führen alle Wege nach Rom. Diese Webseite zeigt dir Richtung in die du laufen musst.
   </ion-card-content>
-  
   <ion-button (click)="trackLocation()" expand="block" fill="clear" shape="round">
     Zeig mir den Weg nach Rom
   </ion-button>
+</div>
+  <ion-card-content class="description">
+    {{outputDirection}}<br/>
+  </ion-card-content>
 
-  <ion-button (click)="startCompass()" expand="block" fill="clear" shape="round">
-    Kompass Go
-  </ion-button>
-
-  <ion-card *ngIf="coordinates">
-    Latitude / Breitengrad = {{coordinates.latitude}}<br/>
-    Longitude / Längengrad = {{coordinates.longitude}}
+<ng-template #arrow>
+  <ion-card>
+    <ion-img src={{arrow}} class="arrow">
+    </ion-img>
   </ion-card>
+</ng-template>
 
 
-  <ion-card *ngIf="alpha">
-    Alpha = {{alpha}}
-  </ion-card>
-  
+
+
 
 
 </ion-content>

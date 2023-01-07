@@ -1,0 +1,20 @@
+.arrow{
+  width: 25%;
+  height: 25%;
+  margin:auto;
+}
+
+.description{
+  display: flex;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  border: 2px;
+}
+
+.center{
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
