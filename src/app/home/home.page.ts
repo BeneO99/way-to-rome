@@ -13,9 +13,7 @@ export class HomePage {
   compass: any;
   pointDegree: any;
 
-  coordinates: any;
-  rome: [number, number] = [41.4536, 12.3209];//
-  outputDirection: any;
+  rome: [number, number] = [41.4536, 12.3209];
   arrowimg:string = "";
 
   isIOS =
@@ -35,7 +33,7 @@ export class HomePage {
 
   handler(compass: any){
     if(compass == null){
-      this.outputDirection = "Dein Gerät unterstützt kein Magnetometer";
+      alert("Dein Gerät unterstützt kein Magnetometer");
       return;
     }
     
@@ -47,28 +45,20 @@ export class HomePage {
 
     if(relativeDirection <= 22.5 || relativeDirection > 337.5){ //0
       this.arrowimg = 'assets/Arrows/up.png';
-      this.outputDirection = "Norden";
     } else if(relativeDirection > 22.5 && relativeDirection <= 67.5){ //45
       this.arrowimg = 'assets/Arrows/up_right.png';
-      this.outputDirection = "Nord-Ost";
     } else if(relativeDirection > 67.5 && relativeDirection <= 112.5){ //90
       this.arrowimg = 'assets/Arrows/right.png';
-      this.outputDirection = "Osten";
     }else if(relativeDirection > 112.5 && relativeDirection <= 157.5){ //135
       this.arrowimg = 'assets/Arrows/right_down.png';
-      this.outputDirection = "Süd-Ost";
     }else if(relativeDirection > 157.5 && relativeDirection <= 202.5){ //180
       this.arrowimg = 'assets/Arrows/down.png';
-      this.outputDirection = "Süden";
     }else if(relativeDirection > 202.5 && relativeDirection <= 250.5){ //225
       this.arrowimg = 'assets/Arrows/left_down.png';
-      this.outputDirection = "Süd-West";
     }else if(relativeDirection > 250.5 && relativeDirection <= 295.5){ //270
       this.arrowimg = 'assets/Arrows/left.png';
-      this.outputDirection = "Westen";
     }else if(relativeDirection > 295.5 && relativeDirection <= 337.5){ //315
       this.arrowimg = 'assets/Arrows/up_left.png';
-      this.outputDirection = "Nord-West";
     }
 
     

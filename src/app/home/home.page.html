@@ -15,7 +15,7 @@
       </ion-title>
     </ion-toolbar>
   </ion-header>
-<div *ngIf="!outputDirection else arrow" class="center">
+<div *ngIf="!arrowimg else arrow" class="center">
   <ion-card-content class="description">
     Bekanntlich führen alle Wege nach Rom. Diese Webseite zeigt dir Richtung in die du laufen musst.
   </ion-card-content>
@@ -23,16 +23,16 @@
     Zeig mir den Weg nach Rom
   </ion-button>
 </div>
-  <ion-card-content class="description">
-    Halte dein Handy horizontal und folge dem Pfeil.
-  </ion-card-content>
 
-  <ion-img [src]="arrowimg" class="arrow">
-  </ion-img>
+
 
 <ng-template #arrow>
   <ion-card>
-
+    <ion-card-content class="description">
+      Halte dein Handy horizontal und folge dem Pfeil.
+    </ion-card-content>
+    <ion-img [src]="arrowimg" class="arrow">
+    </ion-img>
   </ion-card>
 </ng-template>
 
