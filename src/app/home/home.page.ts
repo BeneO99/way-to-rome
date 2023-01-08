@@ -16,15 +16,14 @@ export class HomePage {
   coordinates: any;
   rome: [number, number] = [41.4536, 12.3209];//
   outputDirection: any;
-  alpha: any;
-  arrow:any;
+  arrowimg:string = "";
 
   isIOS =
       navigator.userAgent.match(/(iPod|iPhone|iPad)/) &&
       navigator.userAgent.match(/AppleWebKit/);
 
   trackLocation() {
-    if (navigator.geolocation) {
+    if (navigator.geolocation && !this.isIOS) {
       
       navigator.geolocation.getCurrentPosition((position) => {this.locationHandler(position)}, (error) => alert(error.message))
       window.addEventListener("deviceorientationabsolute", (compass) => {this.handler(compass)}, true);
@@ -40,33 +39,35 @@ export class HomePage {
       return;
     }
     
-    var relativeDirection = compass.webkitCompassHeading || Math.abs(compass.alpha - 360);
-    this.alpha = relativeDirection;
-    relativeDirection = Math.abs(relativeDirection - this.pointDegree);
+    var compass = compass.webkitCompassHeading || Math.abs(compass.alpha - 360);
+    var relativeDirection =  this.pointDegree - compass;
+    if(relativeDirection < 0){
+      relativeDirection = relativeDirection + 360
+    }
 
     if(relativeDirection <= 22.5 || relativeDirection > 337.5){ //0
-      this.arrow = 'assets/Arrows/up.png';
+      this.arrowimg = 'assets/Arrows/up.png';
       this.outputDirection = "Norden";
     } else if(relativeDirection > 22.5 && relativeDirection <= 67.5){ //45
-      this.arrow = 'assets/Arrows/up_right.png';
+      this.arrowimg = 'assets/Arrows/up_right.png';
       this.outputDirection = "Nord-Ost";
     } else if(relativeDirection > 67.5 && relativeDirection <= 112.5){ //90
-      this.arrow = 'assets/Arrows/right.png';
+      this.arrowimg = 'assets/Arrows/right.png';
       this.outputDirection = "Osten";
     }else if(relativeDirection > 112.5 && relativeDirection <= 157.5){ //135
-      this.arrow = 'assets/Arrows/right_down.png';
+      this.arrowimg = 'assets/Arrows/right_down.png';
       this.outputDirection = "Süd-Ost";
     }else if(relativeDirection > 157.5 && relativeDirection <= 202.5){ //180
-      this.arrow = 'assets/Arrows/down.png';
+      this.arrowimg = 'assets/Arrows/down.png';
       this.outputDirection = "Süden";
     }else if(relativeDirection > 202.5 && relativeDirection <= 250.5){ //225
-      this.arrow = 'assets/Arrows/left_down.png';
+      this.arrowimg = 'assets/Arrows/left_down.png';
       this.outputDirection = "Süd-West";
     }else if(relativeDirection > 250.5 && relativeDirection <= 295.5){ //270
-      this.arrow = 'assets/Arrows/left.png';
+      this.arrowimg = 'assets/Arrows/left.png';
       this.outputDirection = "Westen";
     }else if(relativeDirection > 295.5 && relativeDirection <= 337.5){ //315
-      this.arrow = 'assets/Arrows/up_left.png';
+      this.arrowimg = 'assets/Arrows/up_left.png';
       this.outputDirection = "Nord-West";
     }
 
@@ -85,8 +86,8 @@ locationHandler(position: any) {
 calcDegreeToPoint(latitude: number, longitude: number) {
   // Rome geolocation
   const point = {
-    lat: 41.4536,
-    lng: 12.3209,
+    lat: this.rome[0],
+    lng: this.rome[1],
   };
 
   const phiK = (point.lat * Math.PI) / 180.0;
