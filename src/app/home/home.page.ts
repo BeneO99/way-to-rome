@@ -24,9 +24,10 @@ export class HomePage {
       navigator.userAgent.match(/AppleWebKit/);
 
   trackLocation() {
-    if (navigator.geolocation && !this.isIOS) {
-      window.addEventListener("deviceorientationabsolute", (compass) => {this.handler(compass)}, true);
+    if (navigator.geolocation) {
+      
       navigator.geolocation.getCurrentPosition((position) => {this.locationHandler(position)}, (error) => alert(error.message))
+      window.addEventListener("deviceorientationabsolute", (compass) => {this.handler(compass)}, true);
      
     } else { 
       alert("Geolocation is not supported by this browser.");
@@ -40,31 +41,32 @@ export class HomePage {
     }
     
     var relativeDirection = compass.webkitCompassHeading || Math.abs(compass.alpha - 360);
-    relativeDirection = relativeDirection - this.pointDegree;
+    this.alpha = relativeDirection;
+    relativeDirection = Math.abs(relativeDirection - this.pointDegree);
 
     if(relativeDirection <= 22.5 || relativeDirection > 337.5){ //0
-      this.arrow = '../assets/Arrows/up.png';
+      this.arrow = 'assets/Arrows/up.png';
       this.outputDirection = "Norden";
     } else if(relativeDirection > 22.5 && relativeDirection <= 67.5){ //45
-      this.arrow = '../assets/Arrows/up_right.png';
+      this.arrow = 'assets/Arrows/up_right.png';
       this.outputDirection = "Nord-Ost";
     } else if(relativeDirection > 67.5 && relativeDirection <= 112.5){ //90
-      this.arrow = '../assets/Arrows/right.png';
+      this.arrow = 'assets/Arrows/right.png';
       this.outputDirection = "Osten";
     }else if(relativeDirection > 112.5 && relativeDirection <= 157.5){ //135
-      this.arrow = '../assets/Arrows/right_down.png';
-      this.outputDirection = "Sür-Ost";
+      this.arrow = 'assets/Arrows/right_down.png';
+      this.outputDirection = "Süd-Ost";
     }else if(relativeDirection > 157.5 && relativeDirection <= 202.5){ //180
-      this.arrow = '../assets/Arrows/down.png';
+      this.arrow = 'assets/Arrows/down.png';
       this.outputDirection = "Süden";
     }else if(relativeDirection > 202.5 && relativeDirection <= 250.5){ //225
-      this.arrow = '../assets/Arrows/left_down.png';
+      this.arrow = 'assets/Arrows/left_down.png';
       this.outputDirection = "Süd-West";
     }else if(relativeDirection > 250.5 && relativeDirection <= 295.5){ //270
-      this.arrow = '../assets/Arrows/left.png';
+      this.arrow = 'assets/Arrows/left.png';
       this.outputDirection = "Westen";
     }else if(relativeDirection > 295.5 && relativeDirection <= 337.5){ //315
-      this.arrow = '../assets/Arrows/up_left.png';
+      this.arrow = 'assets/Arrows/up_left.png';
       this.outputDirection = "Nord-West";
     }
 

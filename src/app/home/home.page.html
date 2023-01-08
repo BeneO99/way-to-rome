@@ -25,12 +25,17 @@
 </div>
   <ion-card-content class="description">
     {{outputDirection}}<br/>
+    {{pointDegree}} <br/>
+    {{alpha}}<br/>
+    {{arrow}}
   </ion-card-content>
+
+  <ion-img [src]="arrow" class="arrow">
+  </ion-img>
 
 <ng-template #arrow>
   <ion-card>
-    <ion-img src={{arrow}} class="arrow">
-    </ion-img>
+
   </ion-card>
 </ng-template>
 
